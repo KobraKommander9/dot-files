@@ -1,6 +1,6 @@
 {
   "ChatGPT.nvim": { "branch": "main", "commit": "af509fceb70cab1867a611f3d8fad6d3e7760fb0" },
-  "KobraVim": { "branch": "main", "commit": "151fcc37ffe5f7396b9c6d8a1d2ee760f3e35bae" },
+  "KobraVim": { "branch": "main", "commit": "9707e54f9c42ea385f3cf3c1142cf44999aac34b" },
   "LuaSnip": { "branch": "master", "commit": "51ebb4b6637290e1b8e0fb0d6f38b605d3c24940" },
   "SchemaStore.nvim": { "branch": "main", "commit": "2d0b27ad28443cb700835b0d6a404ffe7f29c731" },
   "alpha-nvim": { "branch": "main", "commit": "1838ae926e8d49fe5330d1498ee8289ae2c340bc" },
