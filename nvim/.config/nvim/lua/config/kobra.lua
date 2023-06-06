@@ -20,6 +20,9 @@ require("lazy").setup({
           colemak = true,
         },
         start_screen = {
+          buttons = {
+            ["fg"] = { "Furious George", "~/fg" },
+          },
           folders = {
             { "Matrix", "~/Matrix" },
             { "Projects", "p", "~/Projects" },
