@@ -21,7 +21,9 @@ require("lazy").setup({
         },
         start_screen = {
           buttons = {
+            ["nv"] = { "nvim", "~/dot-files/nvim/.config/nvim" },
             ["fg"] = { "Furious George", "~/fg" },
+            ["om"] = { "Omnichannel", "~/Matrix/services/omnichannel" },
           },
           folders = {
             { "Matrix", "~/Matrix" },
