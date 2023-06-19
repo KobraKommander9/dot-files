@@ -9,6 +9,7 @@
 
 [core]
   pager = delta
+  editor = nvim
 
 [interactive]
   diffFilter = delta --color-only
@@ -27,5 +28,6 @@
 
 [init]
 	defaultBranch = master
+
 [url "git@git.tcncloud.net:"]
 	insteadOf = https://git.tcncloud.net/

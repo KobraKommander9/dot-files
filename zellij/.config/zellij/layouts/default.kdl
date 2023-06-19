@@ -23,6 +23,17 @@ layout {
     }
   }
 
+  swap_floating_layout name="large_float" {
+    floating_panes {
+      pane {
+        x "5%"
+        y "5%"
+        width "90%"
+        height "90%"
+      }
+    }
+  }
+
   tab name="nvim" focus=true {
     pane command="nvim"
   }
