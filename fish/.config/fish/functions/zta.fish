@@ -1,12 +1,10 @@
 #!/usr/bin/env fish
 
-function zta -d "attach to current zellij session"
-  set ZJ_SESSIONS (zt list-sessions)
-  set NO_SESSIONS (echo $ZJ_SESSIONS | wc -l)
-
-  if test $NO_SESSIONS -gt 2
-    zt attach (echo $ZJ_SESSIONS | sk)
-  else
-    zt attach -c
-  end
+function zta -d "attach to current directory zellij session"
+    set zj_session (zellij list-sessions | grep (pwd))
+    if test -z $zj_session
+        zellij -s (pwd | awk '{gsub("/","%",$1); print $1;}')
+    else
+        zellij attach $zj_selected
+    end
 end

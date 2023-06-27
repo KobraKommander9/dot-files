@@ -7,7 +7,7 @@ function nvims
     end
 
     set items default KobraVim blank test LazyVim
-    set config (printf "%s\n" $items | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
+    set config (printf "%s\n" $items | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0 --bind "ctrl-n:down,ctrl-e:up")
     if test -z $config
         echo "Nothing selected"
         return 0
