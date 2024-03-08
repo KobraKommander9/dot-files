@@ -11,6 +11,8 @@ function M.apply(config)
   config.keys = {
     { key = "q", mods = "CMD", action = wezterm.action.QuitApplication },
     { key = "v", mods = "CMD", action = wezterm.action.PasteFrom("Clipboard") },
+    { key = "n", mods = "CMD", action = wezterm.action.IncreaseFontSize },
+    { key = "e", mods = "CMD", action = wezterm.action.DecreaseFontSize },
   }
 end
 
