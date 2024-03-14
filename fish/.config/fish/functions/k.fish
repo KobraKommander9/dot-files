@@ -1,5 +1,5 @@
 #!/usr/bin/env fish
 
-function k
-  kubectl $argv
+function k --wraps kubectl
+    kubectl $argv
 end
