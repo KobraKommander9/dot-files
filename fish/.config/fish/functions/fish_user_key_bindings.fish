@@ -5,6 +5,9 @@ function fish_user_key_bindings
     bind -s --preset -M insert \cn down-line
     bind -s --preset -M insert \ce up-line
 
+    bind -M insert -m default qn backward-char force-repaint
+    bind -M insert qq 'commandline -i j'
+
     # default
     bind -s --preset -M default i forward-char # l
     bind -s --preset e up-or-search # k

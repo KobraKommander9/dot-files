@@ -8,6 +8,14 @@ function M.keys()
     -- Application
     { key = "q", mods = "CMD", action = act.QuitApplication },
     { key = "r", mods = "CMD", action = act.ReloadConfiguration },
+    {
+      key = "R",
+      mods = "CMD",
+      action = act.Multiple({
+        act.ResetTerminal,
+        act.SendKey({ key = "Enter" }),
+      }),
+    },
 
     -- Window
     { key = "f", mods = "CMD", action = act.ToggleFullScreen },
