@@ -11,4 +11,6 @@ require("keys.config").apply(config)
 
 config.term = "wezterm"
 
+require("workspaces")
+
 return config

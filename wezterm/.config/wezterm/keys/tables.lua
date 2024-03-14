@@ -38,6 +38,13 @@ function M.keys()
       }),
     },
     {
+      key = "s",
+      mods = "ALT",
+      action = act.ActivateKeyTable({
+        name = "sessions",
+      }),
+    },
+    {
       key = "t",
       mods = "ALT",
       action = act.ActivateKeyTable({
@@ -69,6 +76,27 @@ function M.tables()
 
   return {
     copy_mode = copy_mode,
+
+    -- sessions
+    sessions = {
+      -- exit
+      { key = "Enter", action = act.PopKeyTable },
+      { key = "Escape", action = act.PopKeyTable },
+
+      -- new sessions
+      { key = "d", action = act.SwitchToWorkspace({ name = "default" }) },
+      { key = "v", action = act.SwitchToWorkspace({ name = "nvim" }) },
+      { key = "n", action = act.SwitchToWorkspace },
+
+      -- find sessions
+      {
+        key = "f",
+        action = act.Multiple({
+          act.ClearKeyTableStack,
+          act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }),
+        }),
+      },
+    },
 
     -- windows
     win_mode = {

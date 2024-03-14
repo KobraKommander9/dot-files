@@ -17,9 +17,15 @@ function M.update_right_status(window, pane)
   if tab then
     for _, p in ipairs(tab:panes_with_info()) do
       if p.is_zoomed then
-        table.insert(cells, "ZOOMED")
+        table.insert(cells, "󱡴")
       end
     end
+  end
+
+  -- workspace
+  local workspace = wezterm.mux.get_active_workspace()
+  if workspace then
+    table.insert(cells, workspace)
   end
 
   -- Figure out the cwd and host of the current pane.
