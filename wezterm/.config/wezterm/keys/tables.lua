@@ -6,7 +6,6 @@ local act = wezterm.action
 function M.keys()
   return {
     -- Application
-    { key = "q", mods = "CMD", action = act.QuitApplication },
     { key = "r", mods = "CMD", action = act.ReloadConfiguration },
     {
       key = "R",
@@ -21,12 +20,14 @@ function M.keys()
     { key = "f", mods = "CMD", action = act.ToggleFullScreen },
 
     -- Clipboard
-    { key = "y", mods = "CMD", action = act.ActivateCopyMode },
     { key = "v", mods = "CMD", action = act.PasteFrom("Clipboard") },
 
     -- Font
     { key = "n", mods = "CMD", action = act.IncreaseFontSize },
     { key = "e", mods = "CMD", action = act.DecreaseFontSize },
+
+    -- Search
+    { key = "s", mods = "CMD", action = act.Search("CurrentSelectionOrEmptyString") },
 
     -- Tables
     {
@@ -38,10 +39,17 @@ function M.keys()
       }),
     },
     {
-      key = "s",
+      key = "q",
       mods = "ALT",
       action = act.ActivateKeyTable({
         name = "sessions",
+      }),
+    },
+    {
+      key = "s",
+      mods = "ALT",
+      action = act.ActivateKeyTable({
+        name = "custom_search",
       }),
     },
     {
@@ -60,6 +68,7 @@ function M.keys()
         one_shot = false,
       }),
     },
+    { key = "y", mods = "ALT", action = act.ActivateCopyMode },
   }
 end
 
@@ -74,8 +83,36 @@ function M.tables()
     table.insert(copy_mode, { key = "k", action = act.CopyMode("MoveForwardWordEnd") })
   end
 
+  local search_mode = nil
+  if wezterm.gui then
+    search_mode = wezterm.gui.default_key_tables().search_mode
+    table.insert(search_mode, { key = "n", mods = "CTRL", action = act.CopyMode("NextMatch") })
+    table.insert(search_mode, { key = "e", mods = "CTRL", action = act.CopyMode("PriorMatch") })
+
+    table.insert(search_mode, { key = "p", mods = "CTRL", action = act.CopyMode("ClearPattern") })
+
+    table.insert(search_mode, { key = "d", mods = "CTRL", action = act.CopyMode("NextMatchPage") })
+    table.insert(search_mode, { key = "u", mods = "CTRL", action = act.CopyMode("PriorMatchPage") })
+
+    table.insert(search_mode, { key = "y", mods = "CTRL", action = act.ActivateCopyMode })
+  end
+
   return {
     copy_mode = copy_mode,
+    search_mode = search_mode,
+
+    -- search
+    custom_search = {
+      -- exit
+      { key = "Enter", action = act.PopKeyTable },
+      { key = "Escape", action = act.PopKeyTable },
+
+      -- search
+      { key = "s", action = act.Search("CurrentSelectionOrEmptyString") },
+      { key = "H", action = act.Search({
+        Regex = "[a-f0-9]{6,}",
+      }) },
+    },
 
     -- sessions
     sessions = {
