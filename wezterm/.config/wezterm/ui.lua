@@ -22,7 +22,7 @@ end
 
 function M.apply(config)
   config.enable_tab_bar = true
-  config.tab_bar_at_bottom = false
+  config.tab_bar_at_bottom = true
 
   config.window_background_opacity = 0.9
   config.initial_rows = 50
