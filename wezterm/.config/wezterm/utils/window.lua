@@ -6,20 +6,34 @@ function M.update_right_status(window, pane)
   -- Each element holds the text for a cell in a "powerline" style << fade
   local cells = {}
 
-  -- get current key table
+  local mods = ""
+  local zoomed = ""
+
   local key_table = window:active_key_table()
   if key_table then
-    table.insert(cells, key_table)
+    mods = key_table
   end
 
-  -- if the pane is zoomed
   local tab = pane:tab()
   if tab then
     for _, p in ipairs(tab:panes_with_info()) do
       if p.is_zoomed then
-        table.insert(cells, "󱡴")
+        zoomed = "󱡴"
+        break
       end
     end
+  end
+
+  if zoomed ~= "" then
+    if mods ~= "" then
+      mods = mods .. " " .. zoomed
+    else
+      mods = zoomed
+    end
+  end
+
+  if mods ~= "" then
+    table.insert(cells, mods)
   end
 
   -- workspace
