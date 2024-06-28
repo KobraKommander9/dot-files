@@ -311,10 +311,14 @@ function M.tables()
       { key = "Escape", action = act.PopKeyTable },
 
       -- resize
-      { key = "h", action = act.AdjustPaneSize({ "Left", 2 }) },
-      { key = "n", action = act.AdjustPaneSize({ "Down", 2 }) },
-      { key = "e", action = act.AdjustPaneSize({ "Up", 2 }) },
-      { key = "i", action = act.AdjustPaneSize({ "Right", 2 }) },
+      { key = "h", action = act.AdjustPaneSize({ "Left", 1 }) },
+      { key = "H", action = act.AdjustPaneSize({ "Left", 5 }) },
+      { key = "n", action = act.AdjustPaneSize({ "Down", 1 }) },
+      { key = "N", action = act.AdjustPaneSize({ "Down", 5 }) },
+      { key = "e", action = act.AdjustPaneSize({ "Up", 1 }) },
+      { key = "E", action = act.AdjustPaneSize({ "Up", 5 }) },
+      { key = "i", action = act.AdjustPaneSize({ "Right", 1 }) },
+      { key = "I", action = act.AdjustPaneSize({ "Right", 5 }) },
     },
   }
 end
