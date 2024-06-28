@@ -12,26 +12,14 @@ wezterm.on("gui-startup", function(cmd)
   end
 
   -- Set a workspace for nvim
-  local tab, term_pane, window = mux.spawn_window({
-    workspace = "nvim",
+  local tab, _, _ = mux.spawn_window({
+    workspace = "default",
     args = args,
   })
 
-  tab:set_title("nvim")
+  tab:set_title("default")
 
-  local _, nvim_pane, _ = term_pane:split({
-    direction = "Top",
-    size = 0.8,
-  })
-
-  nvim_pane:send_text("nvim\n")
-
-  tab:set_zoomed(true)
-
-  local term_tab, _, _ = window:spawn_tab()
-  term_tab:set_title("term")
-
-  mux.set_active_workspace("nvim")
+  mux.set_active_workspace("default")
 end)
 
 return M

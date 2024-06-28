@@ -6,6 +6,7 @@ local act = wezterm.action
 function M.keys()
   return {
     -- Application
+    { key = "q", mods = "CMD", action = act.QuitApplication },
     { key = "r", mods = "CMD", action = act.ReloadConfiguration },
     {
       key = "R",
@@ -23,11 +24,11 @@ function M.keys()
     { key = "v", mods = "CMD", action = act.PasteFrom("Clipboard") },
 
     -- Font
-    { key = "n", mods = "CMD", action = act.IncreaseFontSize },
-    { key = "e", mods = "CMD", action = act.DecreaseFontSize },
+    { key = "+", mods = "CMD", action = act.IncreaseFontSize },
+    { key = "-", mods = "CMD", action = act.DecreaseFontSize },
 
-    -- Search
-    { key = "s", mods = "CMD", action = act.Search("CurrentSelectionOrEmptyString") },
+    -- Launcher
+    { key = "l", mods = "ALT", action = act.ShowLauncherArgs({ flags = "FUZZY|DOMAINS" }) },
 
     -- Tables
     {
@@ -36,6 +37,7 @@ function M.keys()
       action = act.ActivateKeyTable({
         name = "pane_mode",
         one_shot = false,
+        replace_current = true,
       }),
     },
     {
@@ -43,13 +45,25 @@ function M.keys()
       mods = "ALT",
       action = act.ActivateKeyTable({
         name = "sessions",
+        one_shot = false,
+        replace_current = true,
       }),
     },
     {
       key = "s",
       mods = "ALT",
       action = act.ActivateKeyTable({
+        name = "scroll",
+        one_shot = false,
+        replace_current = true,
+      }),
+    },
+    {
+      key = "S",
+      mods = "ALT",
+      action = act.ActivateKeyTable({
         name = "custom_search",
+        replace_current = true,
       }),
     },
     {
@@ -58,6 +72,7 @@ function M.keys()
       action = act.ActivateKeyTable({
         name = "tab_mode",
         one_shot = false,
+        replace_current = true,
       }),
     },
     {
@@ -66,6 +81,7 @@ function M.keys()
       action = act.ActivateKeyTable({
         name = "win_mode",
         one_shot = false,
+        replace_current = true,
       }),
     },
     { key = "y", mods = "ALT", action = act.ActivateCopyMode },
@@ -101,6 +117,21 @@ function M.tables()
     copy_mode = copy_mode,
     search_mode = search_mode,
 
+    -- scroll
+    scroll = {
+      -- exit
+      { key = "Enter", action = act.PopKeyTable },
+      { key = "Escape", action = act.PopKeyTable },
+
+      -- scroll
+      { key = "n", action = act.ScrollByLine(1) },
+      { key = "e", action = act.ScrollByLine(-1) },
+      { key = "d", action = act.ScrollByPage(0.5) },
+      { key = "u", action = act.ScrollByPage(-0.5) },
+      { key = "g", action = act.ScrollToTop },
+      { key = "g", mods = "SHIFT", action = act.ScrollToBottom },
+    },
+
     -- search
     custom_search = {
       -- exit
@@ -121,9 +152,11 @@ function M.tables()
       { key = "Escape", action = act.PopKeyTable },
 
       -- new sessions
-      { key = "d", action = act.SwitchToWorkspace({ name = "default" }) },
-      { key = "v", action = act.SwitchToWorkspace({ name = "nvim" }) },
-      { key = "n", action = act.SwitchToWorkspace },
+      { key = "s", action = act.SwitchToWorkspace },
+
+      -- change sessions
+      { key = "n", action = act.SwitchWorkspaceRelative(1) },
+      { key = "e", action = act.SwitchWorkspaceRelative(-1) },
 
       -- find sessions
       {
@@ -131,6 +164,29 @@ function M.tables()
         action = act.Multiple({
           act.ClearKeyTableStack,
           act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }),
+        }),
+      },
+
+      -- rename
+      {
+        key = "r",
+        action = act.Multiple({
+          act.PopKeyTable,
+          act.PromptInputLine({
+            description = "Enter new workspace name",
+            action = wezterm.action_callback(function(
+              window,
+              _, --[[ pane ]]
+              line
+            )
+              -- line will be `nil` if they hit escape without entering anything
+              -- An empty string if they just hit enter
+              -- Or the actual line of text they wrote
+              if line then
+                wezterm.mux.rename_workspace(window:active_workspace(), line)
+              end
+            end),
+          }),
         }),
       },
     },
@@ -255,10 +311,10 @@ function M.tables()
       { key = "Escape", action = act.PopKeyTable },
 
       -- resize
-      { key = "h", action = act.AdjustPaneSize({ "Left", 5 }) },
-      { key = "n", action = act.AdjustPaneSize({ "Down", 5 }) },
-      { key = "e", action = act.AdjustPaneSize({ "Up", 5 }) },
-      { key = "i", action = act.AdjustPaneSize({ "Right", 5 }) },
+      { key = "h", action = act.AdjustPaneSize({ "Left", 2 }) },
+      { key = "n", action = act.AdjustPaneSize({ "Down", 2 }) },
+      { key = "e", action = act.AdjustPaneSize({ "Up", 2 }) },
+      { key = "i", action = act.AdjustPaneSize({ "Right", 2 }) },
     },
   }
 end

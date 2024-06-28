@@ -8,6 +8,7 @@ end
 
 require("ui").apply(config)
 require("keys.config").apply(config)
+require("domains").apply(config)
 
 config.term = "wezterm"
 

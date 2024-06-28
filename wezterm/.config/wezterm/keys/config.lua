@@ -8,7 +8,7 @@ function M.apply(config)
 
   local tables = require("keys.tables")
 
-  -- config.leader = { key = "a", mods = "ALT" }
+  config.leader = { key = "a", mods = "ALT" }
   config.keys = tables.keys()
   config.key_tables = tables.tables()
 end
