@@ -1,5 +1,9 @@
 local M = {}
 
+do
+  return M
+end
+
 M[#M + 1] = {
   "ellisonleao/gruvbox.nvim",
   config = function()
@@ -65,9 +69,6 @@ M[#M + 1] = {
 
 M[#M + 1] = {
   "Mofiqul/dracula.nvim",
-  opts = {
-    transparent_bg = true,
-  },
 }
 
 return M

@@ -1,1 +1,1 @@
-require('kobra.core')
+require("config")

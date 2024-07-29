@@ -15,43 +15,16 @@ require("lazy").setup({
   spec = {
     {
       "KobraKommander9/KobraVim",
+      branch = "rewrite-plugin",
       opts = {
         layouts = {
           colemak = true,
-        },
-        start_screen = {
-          buttons = {
-            ["nv"] = { "nvim", "~/dot-files/nvim/.config/nvim" },
-            ["fg"] = { "Furious George", "~/fg" },
-            ["om"] = { "Omnichannel", "~/Matrix/services/omnichannel" },
-          },
-          folders = {
-            { "Matrix", "~/Matrix" },
-            { "Projects", "p", "~/Projects" },
-          },
-          workspaces = {
-            {
-              "Matrix Sessions",
-              "ms",
-              "~/Matrix",
-            },
-            {
-              "Project Sessions",
-              "ps",
-              "~/Projects/",
-            },
-            {
-              "Dotfile Sessions",
-              "ds",
-              "~/dot-files/",
-            },
-          },
         },
       },
       import = "kobra.plugins",
     },
     -- import any extras modules here
-    { import = "kobra.plugins.presets.kobra" },
+    -- { import = "kobra.plugins.presets.kobra" },
     -- import/override with your plugins
     { import = "plugins" },
   },
