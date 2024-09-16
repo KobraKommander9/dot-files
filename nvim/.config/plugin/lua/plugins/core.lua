@@ -6,4 +6,14 @@ return {
       keys = { "qn" },
     },
   },
+
+  {
+    "KobraKommander9/autumn.nvim",
+    branch = "colorscheme",
+    opts = {
+      debug = {
+        enabled = true,
+      },
+    },
+  },
 }

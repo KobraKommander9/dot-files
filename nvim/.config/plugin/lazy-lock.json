@@ -1,0 +1,5 @@
+{
+  "autumn.nvim": { "branch": "colorscheme", "commit": "1da8ef9d3776a2f2455587713839fed161e58aab" },
+  "escapist": { "branch": "master", "commit": "29997bb9692347f912d3ec02c4c148695052f128" },
+  "lazy.nvim": { "branch": "main", "commit": "48b52b5cfcf8f88ed0aff8fde573a5cc20b1306d" }
+}
