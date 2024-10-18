@@ -1,6 +1,11 @@
 local M = {}
 
 M[#M + 1] = {
+  "rktjmp/lush.nvim",
+  cmd = { "Lushify", "LushImport", "LushRunTutorial" },
+}
+
+M[#M + 1] = {
   "ellisonleao/gruvbox.nvim",
   lazy = true,
   config = function()
