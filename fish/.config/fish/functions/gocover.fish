@@ -31,7 +31,7 @@ function gocover
         set dir $argv[1]
     end
 
-    set ignore "\(/testdata/\|/generate.go\|\.cp\.go\|\.pb\.go\|\.mg\.go\|\.mock\.go\)"
+    set ignore "\(/*ctl/\|/testdata/\|/mock/\|/generate.go\|\.cp\.go\|\.pb\.go\|\.mg\.go\|\.mock\.go\)"
     set create (go list -find -f '{{if (and (eq (len .XTestGoFiles) 0) (eq (len .TestGoFiles) 0))}}{{range .GoFiles}}{{$.Name}}:{{$.Dir}}/{{.}}{{"\n"}}{{end}}{{end}}' $dir | grep -v $ignore | xargs dirname | sort -u)
     for package in $create
         set name (echo $package | cut -f1 -d':')
