@@ -2,6 +2,8 @@
 
 set fish_greeting
 
+fish_add_path $HOME/bin
+
 starship init fish | source
 zoxide init fish | source
 kubectl completion fish | source
