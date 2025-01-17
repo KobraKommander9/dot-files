@@ -19,6 +19,14 @@ function M.keys()
 
     -- Window
     { key = "f", mods = "CMD", action = act.ToggleFullScreen },
+    {
+      key = "K",
+      mods = "CTRL",
+      action = act.Multiple({
+        act.ClearScrollback("ScrollbackAndViewport"),
+        act.SendKey({ key = "L", mods = "CTRL" }),
+      }),
+    },
 
     -- Clipboard
     { key = "v", mods = "CMD", action = act.PasteFrom("Clipboard") },
@@ -31,6 +39,11 @@ function M.keys()
     { key = "l", mods = "ALT", action = act.ShowLauncherArgs({ flags = "FUZZY|DOMAINS" }) },
 
     -- Tables
+    {
+      key = "f",
+      mods = "ALT",
+      action = act.Search({ CaseSensitiveString = "" }),
+    },
     {
       key = "p",
       mods = "ALT",
@@ -59,14 +72,6 @@ function M.keys()
       }),
     },
     {
-      key = "S",
-      mods = "ALT",
-      action = act.ActivateKeyTable({
-        name = "custom_search",
-        replace_current = true,
-      }),
-    },
-    {
       key = "t",
       mods = "ALT",
       action = act.ActivateKeyTable({
@@ -89,33 +94,109 @@ function M.keys()
 end
 
 function M.tables()
-  local copy_mode = nil
-  if wezterm.gui then
-    copy_mode = wezterm.gui.default_key_tables().copy_mode
-    table.insert(copy_mode, { key = "n", action = act.CopyMode("MoveDown") })
-    table.insert(copy_mode, { key = "e", action = act.CopyMode("MoveUp") })
-    table.insert(copy_mode, { key = "i", action = act.CopyMode("MoveRight") })
-
-    table.insert(copy_mode, { key = "k", action = act.CopyMode("MoveForwardWordEnd") })
-  end
-
-  local search_mode = nil
-  if wezterm.gui then
-    search_mode = wezterm.gui.default_key_tables().search_mode
-    table.insert(search_mode, { key = "n", mods = "CTRL", action = act.CopyMode("NextMatch") })
-    table.insert(search_mode, { key = "e", mods = "CTRL", action = act.CopyMode("PriorMatch") })
-
-    table.insert(search_mode, { key = "p", mods = "CTRL", action = act.CopyMode("ClearPattern") })
-
-    table.insert(search_mode, { key = "d", mods = "CTRL", action = act.CopyMode("NextMatchPage") })
-    table.insert(search_mode, { key = "u", mods = "CTRL", action = act.CopyMode("PriorMatchPage") })
-
-    table.insert(search_mode, { key = "y", mods = "CTRL", action = act.ActivateCopyMode })
-  end
-
   return {
-    copy_mode = copy_mode,
-    search_mode = search_mode,
+    -- copy text
+    copy_mode = {
+      { key = "Enter", action = act.CopyMode("MoveToStartOfNextLine") },
+      {
+        key = "Escape",
+        action = act.Multiple({
+          act.ScrollToBottom,
+          act.CopyMode("Close"),
+        }),
+      },
+      {
+        key = "c",
+        mods = "CTRL",
+        action = act.Multiple({
+          act.ScrollToBottom,
+          act.CopyMode("Close"),
+        }),
+      },
+      {
+        key = "g",
+        mods = "CTRL",
+        action = act.Multiple({
+          act.ScrollToBottom,
+          act.CopyMode("Close"),
+        }),
+      },
+      {
+        key = "q",
+        action = act.Multiple({
+          act.ScrollToBottom,
+          act.CopyMode("Close"),
+        }),
+      },
+
+      { key = "Tab", action = act.CopyMode("MoveForwardWord") },
+      { key = "Tab", mods = "SHIFT", action = act.CopyMode("MoveBackwardWord") },
+
+      { key = "Space", action = act.CopyMode({ SetSelectionMode = "Cell" }) },
+      { key = "v", action = act.CopyMode({ SetSelectionMode = "Cell" }) },
+      { key = "v", mods = "CTRL", action = act.CopyMode({ SetSelectionMode = "Block" }) },
+      { key = "V", action = act.CopyMode({ SetSelectionMode = "Line" }) },
+
+      { key = "$", action = act.CopyMode("MoveToEndOfLineContent") },
+      { key = "0", action = act.CopyMode("MoveToStartOfLine") },
+      { key = "^", action = act.CopyMode("MoveToStartOfLineContent") },
+
+      { key = ",", action = act.CopyMode("JumpReverse") },
+      { key = ";", action = act.CopyMode("JumpAgain") },
+      { key = "f", action = act.CopyMode({ JumpForward = { prev_char = false } }) },
+      { key = "F", action = act.CopyMode({ JumpBackward = { prev_char = false } }) },
+      { key = "t", action = act.CopyMode({ JumpForward = { prev_char = true } }) },
+      { key = "T", action = act.CopyMode({ JumpBackward = { prev_char = true } }) },
+
+      { key = "g", action = act.CopyMode("MoveToScrollbackTop") },
+      { key = "G", action = act.CopyMode("MoveToScrollbackBottom") },
+      { key = "s", action = act.CopyMode("MoveToViewportTop") },
+      { key = "l", action = act.CopyMode("MoveToViewportBottom") },
+      { key = "m", action = act.CopyMode("MoveToViewportMiddle") },
+      { key = "o", action = act.CopyMode("MoveToSelectionOtherEnd") },
+      { key = "O", action = act.CopyMode("MoveToSelectionOtherEndHoriz") },
+
+      { key = "b", action = act.CopyMode("MoveBackwardWord") },
+      { key = "b", mods = "CTRL", action = act.CopyMode("PageUp") },
+      { key = "w", action = act.CopyMode("MoveForwardWord") },
+      { key = "w", mods = "CTRL", action = act.CopyMode("PageDown") },
+      { key = "k", action = act.CopyMode("MoveForwardWordEnd") },
+
+      { key = "d", mods = "CTRL", action = act.CopyMode({ MoveByPage = 0.5 }) },
+      { key = "u", mods = "CTRL", action = act.CopyMode({ MoveByPage = -0.5 }) },
+
+      { key = "h", action = act.CopyMode("MoveLeft") },
+      { key = "n", action = act.CopyMode("MoveDown") },
+      { key = "e", action = act.CopyMode("MoveUp") },
+      { key = "i", action = act.CopyMode("MoveRight") },
+
+      {
+        key = "y",
+        action = act.Multiple({
+          act.CopyTo("ClipboardAndPrimarySelection"),
+          act.ScrollToBottom,
+          act.CopyMode("Close"),
+        }),
+      },
+    },
+
+    -- searching
+    search_mode = {
+      { key = "Enter", action = act.CopyMode("PriorMatch") },
+      { key = "Escape", action = act.CopyMode("Close") },
+      { key = "q", action = act.CopyMode("Close") },
+
+      { key = "n", mods = "CTRL", action = act.CopyMode("NextMatch") },
+      { key = "e", mods = "CTRL", action = act.CopyMode("PriorMatch") },
+
+      { key = "d", mods = "CTRL", action = act.CopyMode("NextMatchPage") },
+      { key = "u", mods = "CTRL", action = act.CopyMode("PriorMatchPage") },
+
+      { key = "r", mods = "CTRL", action = act.CopyMode("CycleMatchType") },
+      { key = "R", mods = "CTRL", action = act.CopyMode("ClearPattern") },
+
+      { key = "y", mods = "CTRL", action = act.ActivateCopyMode },
+    },
 
     -- scroll
     scroll = {
@@ -130,19 +211,6 @@ function M.tables()
       { key = "u", action = act.ScrollByPage(-0.5) },
       { key = "g", action = act.ScrollToTop },
       { key = "g", mods = "SHIFT", action = act.ScrollToBottom },
-    },
-
-    -- search
-    custom_search = {
-      -- exit
-      { key = "Enter", action = act.PopKeyTable },
-      { key = "Escape", action = act.PopKeyTable },
-
-      -- search
-      { key = "s", action = act.Search("CurrentSelectionOrEmptyString") },
-      { key = "H", action = act.Search({
-        Regex = "[a-f0-9]{6,}",
-      }) },
     },
 
     -- sessions
@@ -239,17 +307,13 @@ function M.tables()
           act.PopKeyTable,
           act.PromptInputLine({
             description = "Enter new tab name",
-            action = wezterm.action_callback(function(
-              window,
-              _, --[[ pane ]]
-              line
-            )
+            action = wezterm.action_callback(function(window, pane, line)
               -- line will be `nil` if they hit escape without entering anything
               -- An empty string if they just hit enter
               -- Or the actual line of text they wrote
               if line then
-                local tab = window:spawn_tab({})
-                tab:set_title(line)
+                window:perform_action(act.SpawnTab("CurrentPaneDomain"), pane)
+                window:active_tab():set_title(line)
               end
             end),
           }),
