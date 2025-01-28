@@ -97,12 +97,12 @@ function M.tables()
   return {
     -- copy text
     copy_mode = {
-      { key = "Enter", action = act.CopyMode("MoveToStartOfNextLine") },
       {
         key = "Escape",
         action = act.Multiple({
           act.ScrollToBottom,
           act.CopyMode("Close"),
+          act.PopKeyTable,
         }),
       },
       {
@@ -111,6 +111,7 @@ function M.tables()
         action = act.Multiple({
           act.ScrollToBottom,
           act.CopyMode("Close"),
+          act.PopKeyTable,
         }),
       },
       {
@@ -119,6 +120,7 @@ function M.tables()
         action = act.Multiple({
           act.ScrollToBottom,
           act.CopyMode("Close"),
+          act.PopKeyTable,
         }),
       },
       {
@@ -126,8 +128,10 @@ function M.tables()
         action = act.Multiple({
           act.ScrollToBottom,
           act.CopyMode("Close"),
+          act.PopKeyTable,
         }),
       },
+      { key = "Enter", action = act.CopyMode("MoveToStartOfNextLine") },
 
       { key = "Tab", action = act.CopyMode("MoveForwardWord") },
       { key = "Tab", mods = "SHIFT", action = act.CopyMode("MoveBackwardWord") },
@@ -176,6 +180,7 @@ function M.tables()
           act.CopyTo("ClipboardAndPrimarySelection"),
           act.ScrollToBottom,
           act.CopyMode("Close"),
+          act.PopKeyTable,
         }),
       },
     },
@@ -183,8 +188,20 @@ function M.tables()
     -- searching
     search_mode = {
       { key = "Enter", action = act.CopyMode("PriorMatch") },
-      { key = "Escape", action = act.CopyMode("Close") },
-      { key = "q", action = act.CopyMode("Close") },
+      {
+        key = "Escape",
+        action = act.Multiple({
+          act.CopyMode("Close"),
+          act.PopKeyTable,
+        }),
+      },
+      {
+        key = "q",
+        action = act.Multiple({
+          act.CopyMode("Close"),
+          act.PopKeyTable,
+        }),
+      },
 
       { key = "n", mods = "CTRL", action = act.CopyMode("NextMatch") },
       { key = "e", mods = "CTRL", action = act.CopyMode("PriorMatch") },
@@ -379,8 +396,16 @@ function M.tables()
         direction = "Down",
         size = { Percent = 50 },
       }) },
+      { key = "l", action = act.SplitPane({
+        direction = "Left",
+        size = { Percent = 50 },
+      }) },
       { key = "r", action = act.SplitPane({
         direction = "Right",
+        size = { Percent = 50 },
+      }) },
+      { key = "u", action = act.SplitPane({
+        direction = "Up",
         size = { Percent = 50 },
       }) },
 
