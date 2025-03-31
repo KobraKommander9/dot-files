@@ -1,8 +1,7 @@
 # Secret configs
 /fish/.config/fish/conf.d/secrets.fish
 /git/gituser
-/zsh/.config/zsh/config.zsh
-/zsh/.config/zsh/docker-secret.zsh
+/zsh/**/*secret*.zsh
 
 # OSX stuff
 .DS_Store

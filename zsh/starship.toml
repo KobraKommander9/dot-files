@@ -1,0 +1,34 @@
+add_newline = false
+command_timeout = 600
+
+format = """
+$directory\
+${custom.short_branch}\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$gcloud\
+$cmd_duration\
+$line_break\
+$jobs\
+$status\
+$container\
+$shell\
+$character"""
+
+[character]
+success_symbol = "[➜](bold green)"
+
+[gcloud]
+format = 'on [$active]($style) '
+
+[custom.short_branch]
+command = "short-branch"
+detect_folders = [".git"]
+detect_files = [".git"]
+description = "The current git branch, shortened"
+symbol = " "
+style = "bold purple"
+format = "[$symbol$output]($style) "
+ignore_timeout = true
