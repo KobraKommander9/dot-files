@@ -30,6 +30,7 @@ function pullgroup -d "Pull and update all repositories in a group"
       echo -e "\033[32;1mPulling $repo_name from $repo_data[2]\033[0m"
       if test -d "$repo_name"
         cd $repo_name
+        git checkout master
         git pull
         cd ..
       else
