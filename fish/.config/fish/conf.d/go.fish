@@ -4,7 +4,7 @@
 # set -gx GOROOT /usr/local/bin
 # set -gx GOBIN $GOPATH/bin
 
-set -gx CGO_ENABLED 0
+set -gx CGO_ENABLED 1
 
 # fish_add_path $GOBIN
 # fish_add_path $GOROOT/bin

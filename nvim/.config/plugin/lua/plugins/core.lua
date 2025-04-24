@@ -11,6 +11,9 @@ return {
     "KobraKommander9/autumn.nvim",
     branch = "colorscheme",
     opts = {
+      transparency = {
+        enabled = true,
+      },
       debug = {
         enabled = true,
       },

@@ -15,14 +15,15 @@ require("lazy").setup({
   spec = {
     {
       "KobraKommander9/KobraVim",
-      branch = "rewrite-plugin",
+      branch = "rewrite2",
       opts = {
-        layout = "colemak",
+        keys = "colemak",
       },
-      import = "kobra.plugins",
+      import = "kobravim.plugins",
     },
     -- import any extras modules here
-    -- { import = "kobra.plugins.presets.kobra" },
+    { import = "kobravim.plugins.extras.dap" },
+    { import = "kobravim.plugins.extras.lang.go" },
     -- import/override with your plugins
     { import = "plugins" },
   },
@@ -35,7 +36,7 @@ require("lazy").setup({
     version = false, -- always use the latest git commit
     -- version = "*", -- try installing the latest stable version for plugins that support semver
   },
-  install = { colorscheme = { "autumn" } },
+  -- install = { colorscheme = { "autumn" } },
   checker = { enabled = false }, -- automatically check for plugin updates
   performance = {
     rtp = {
