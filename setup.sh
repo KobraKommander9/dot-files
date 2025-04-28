@@ -21,7 +21,7 @@ fi
 
 # Install required packages
 print_status "Installing required packages..."
-brew install stow zsh fish neovim go
+brew install stow zsh fish neovim go qmk/qmk/qmk
 
 # Install go tools
 print_status "Installing go tools..."
@@ -74,5 +74,11 @@ if ! grep -q "$FISH_PATH" /etc/shells; then
     echo "$FISH_PATH" | sudo tee -a /etc/shells
 fi
 chsh -s "$FISH_PATH"
+
+# Setup qmk
+print_status "Setting up qmk..."
+qmk config user.keyboard=moonlander user.keymap=colemak
+git clone git@github.com:qmk/qmk_firmware.git ~/qmk_firmware
+git clone git@github.com:KobraKommander9/moonlander_colemak_qmk.git ~/qmk_firmware/keyboards/moonlander/keymaps/colemak
 
 print_status "Setup complete! Please restart your terminal to apply changes." 
