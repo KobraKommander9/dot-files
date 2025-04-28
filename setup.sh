@@ -21,11 +21,38 @@ fi
 
 # Install required packages
 print_status "Installing required packages..."
-brew install stow zsh fish neovim
+brew install stow zsh fish neovim go
+
+# Install go tools
+print_status "Installing go tools..."
+go install github.com/mgechev/revive@latest
 
 # Install WezTerm nightly
-print_status "Installing WezTerm nightly..."
-brew install --cask  wezterm@nightly
+if ! command_exists wezterm; then
+    print_status "Installing WezTerm nightly..."
+    brew install --cask  wezterm@nightly
+else
+    print_status "Updating WezTerm nightly..."
+    brew upgrade --cask wezterm@nightly --no-quarantine --greedy-latest
+fi
+
+# Install bundled fonts
+print_status "Installing bundled fonts..."
+FONTS_DIR="$HOME/Library/Fonts"
+mkdir -p "$FONTS_DIR"
+
+for font in fonts/*.ttf; do
+    if [ -f "$font" ]; then
+        font_name=$(basename "$font")
+        target_path="$FONTS_DIR/$font_name"
+        if [ ! -f "$target_path" ]; then
+            cp "$font" "$target_path"
+            print_status "Installed font: $font_name"
+        else
+            print_status "Font already installed: $font_name"
+        fi
+    fi
+done
 
 # Create ~/.config directory if it doesn't exist
 print_status "Creating ~/.config directory..."

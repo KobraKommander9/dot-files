@@ -61,18 +61,49 @@ stow -v -R -t ~ zellij
 // etc.
 ```
 
-## Extra Setup
-Aside from cloning this repository, you should also add git config `user` information in the ignored
-user (git/gituser) file.
-```
+## Secret Configuration Files
+
+This repository uses `.gitignore` to exclude sensitive configuration files. Here are the files you need to create and their example contents:
+
+### 1. Git User Configuration (`git/gituser`)
+```ini
 [user]
-  name = <name>
-  email = <email>
+    name = Your Name
+    email = your.email@example.com
 ```
 
-There is also a secrets (fish/.config/fish/conf.d/secrets.fish) file that is excluded where you can put any of your secrets. For example,
-to get the ChatGPT plugin to work, you will need to put `set -gx OPENAI_API_KEY "<api-key>"` in that file.
+### 2. Fish Shell Secrets (`fish/.config/fish/conf.d/secrets.fish`)
+```fish
+# API Keys
+set -gx OPENAI_API_KEY "your-openai-api-key"
+set -gx GITHUB_TOKEN "your-github-token"
+set -gx DOCKERHUB_TOKEN "your-dockerhub-token"
 
+# Development Environment Variables
+set -gx AWS_ACCESS_KEY_ID "your-aws-access-key"
+set -gx AWS_SECRET_ACCESS_KEY "your-aws-secret-key"
+set -gx DATABASE_URL "postgres://user:password@localhost:5432/dbname"
+
+# SSH Agent Configuration
+set -gx SSH_AUTH_SOCK "$HOME/.ssh/agent.sock"
+```
+
+### 3. Zsh Secret Configs (`zsh/**/*secret*.zsh`)
+```zsh
+# API Keys
+export OPENAI_API_KEY="your-openai-api-key"
+export GITHUB_TOKEN="your-github-token"
+
+# Development Environment Variables
+export AWS_ACCESS_KEY_ID="your-aws-access-key"
+export AWS_SECRET_ACCESS_KEY="your-aws-secret-key"
+export DATABASE_URL="postgres://user:password@localhost:5432/dbname"
+
+# SSH Agent Configuration
+export SSH_AUTH_SOCK="$HOME/.ssh/agent.sock"
+```
+
+## Extra Setup
 You can also turn off COLEMAK keymaps in [mapping.lua](nvim/.config/nvim/lua/kobra/core/mapping.lua) with `COLEMAK = false`.
 
 If something doesn't work right, first try running `:checkhealth` and resolving any
