@@ -19,6 +19,14 @@ if ! command_exists brew; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
+# Install git if not installed
+if ! command_exists git; then
+    print_status "Installing git..."
+    brew install git
+else
+    print_status "Git already installed!"
+fi
+
 # Install required packages
 print_status "Installing required packages..."
 brew install stow zsh fish neovim go qmk/qmk/qmk
