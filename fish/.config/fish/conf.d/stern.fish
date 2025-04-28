@@ -1,3 +1,3 @@
 #!/usr/bin/env fish
 
-stern --completion=fish | source
+# stern --completion=fish | source
