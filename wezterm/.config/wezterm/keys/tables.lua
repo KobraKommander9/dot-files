@@ -415,6 +415,14 @@ function M.tables()
       { key = "e", action = act.ActivatePaneDirection("Up") },
       { key = "i", action = act.ActivatePaneDirection("Right") },
 
+      { key = "M", action = act.PaneSelect({
+        mode = "SwapWithActive",
+      }) },
+
+      -- rotate
+      { key = "b", mods = "CTRL", action = act.RotatePanes("CounterClockwise") },
+      { key = "n", mods = "CTRL", action = act.RotatePanes("Clockwise") },
+
       -- actions
       { key = "x", action = act.CloseCurrentPane({ confirm = false }) },
       { key = "m", action = act.TogglePaneZoomState },
