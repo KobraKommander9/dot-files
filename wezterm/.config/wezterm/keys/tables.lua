@@ -6,11 +6,11 @@ local act = wezterm.action
 function M.keys()
   return {
     -- Application
-    { key = "q", mods = "CMD", action = act.QuitApplication },
-    { key = "r", mods = "CMD", action = act.ReloadConfiguration },
+    { key = "q", mods = "CTRL", action = act.QuitApplication },
+    { key = "r", mods = "CTRL", action = act.ReloadConfiguration },
     {
       key = "R",
-      mods = "CMD",
+      mods = "CTRL",
       action = act.Multiple({
         act.ResetTerminal,
         act.SendKey({ key = "Enter" }),
@@ -18,7 +18,7 @@ function M.keys()
     },
 
     -- Window
-    { key = "f", mods = "CMD", action = act.ToggleFullScreen },
+    { key = "F", mods = "CTRL", action = act.ToggleFullScreen },
     {
       key = "K",
       mods = "CTRL",
@@ -29,11 +29,13 @@ function M.keys()
     },
 
     -- Clipboard
-    { key = "v", mods = "CMD", action = act.PasteFrom("Clipboard") },
+    { key = "c", mods = "CTRL|SHIFT", action = act.CopyTo("Clipboard") },
+    { key = "v", mods = "CTRL", action = act.PasteFrom("Clipboard") },
+    { key = "v", mods = "CTRL|SHIFT", action = act.PasteFrom("PrimarySelection") },
 
     -- Font
-    { key = "+", mods = "CMD", action = act.IncreaseFontSize },
-    { key = "-", mods = "CMD", action = act.DecreaseFontSize },
+    { key = "+", mods = "CTRL", action = act.IncreaseFontSize },
+    { key = "-", mods = "CTRL", action = act.DecreaseFontSize },
 
     -- Launcher
     { key = "l", mods = "ALT", action = act.ShowLauncherArgs({ flags = "FUZZY|DOMAINS" }) },
