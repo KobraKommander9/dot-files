@@ -25,6 +25,7 @@ end
 function M.apply(config)
   config.enable_tab_bar = true
   config.tab_bar_at_bottom = true
+  config.hide_tab_bar_if_only_one_tab = true
 
   config.window_background_opacity = 0.6
   config.initial_rows = 50
