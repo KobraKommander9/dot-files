@@ -5,6 +5,7 @@ local win_utils = require("utils.window")
 
 wezterm.on("update-right-status", win_utils.update_right_status)
 
+--[[
 local function background(config)
   local home = os.getenv("HOME")
 
@@ -19,17 +20,18 @@ local function background(config)
     },
   }
 end
+--]]
 
 function M.apply(config)
   config.enable_tab_bar = true
   config.tab_bar_at_bottom = true
 
-  config.window_background_opacity = 0.9
+  config.window_background_opacity = 0.6
   config.initial_rows = 50
   config.initial_cols = 160
 
   config.font = wezterm.font("GoMono Nerd Font Mono")
-  config.font_size = 16.0
+  config.font_size = 12.0
 
   config.color_scheme = "Dark+"
   config.inactive_pane_hsb = {
@@ -37,7 +39,7 @@ function M.apply(config)
     brightness = 0.4,
   }
 
-  background(config)
+  -- background(config)
 end
 
 return M
