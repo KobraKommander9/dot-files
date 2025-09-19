@@ -6,7 +6,6 @@ FILENAME="$OUTPUT_DIR/recording_$(date +'%Y-%m-%d_%H-%M-%S').mp4"
 
 STATE_DIR="/tmp/wf-recorder-toggle"
 mkdir -p "$STATE_DIR"
-LIS_PID_FILE="$STATE_DIR/listener.pid"
 MODULE_FILE="$STATE_DIR/modules.txt"
 PID_FILE="$STATE_DIR/wf-recorder.pid"
 
@@ -23,44 +22,35 @@ unload_modules() {
   fi
 }
 
-create_mic_sink() {
-  if ! pactl list short sinks | grep -q '^.*\smic_sink\s'; then
-    local SINK_ID=$(load_module module-null-sink sink_name=mic_sink sink_properties=device.description=MicSink)
-    echo "$SINK_ID" >>"$MODULE_FILE"
-  fi
-
-  local MIC=$(pactl get-default-source)
-  if ! pactl list short modules | grep -q "source=$MIC" | grep -q "sink=mic_sink"; then
-    local MIC_ID=$(load_module module-loopback source="$MIC" sink=mic_sink latency_msec=1)
-    echo "$MIC_ID" >>"$MODULE_FILE"
-  fi
+cleanup_old_sink() {
+  for src in $(pactl list short sources | awk '$2 ~ /record_mix/ {print $2}'); do
+    local MODULE=$(pactl list short sources | awk -v s="$src" '$2==s {print $1}')
+    pactl unload-module "$MODULE" 2>/dev/null || true
+  done
 }
 
-create_system_sink() {
-  if ! pactl list short sinks | grep -q '^.*\ssystem_sink\s'; then
-    local SINK_ID=$(load_module module-null-sink sink_name=system_sink sink_properties=device.description=SystemSink)
-    echo "$SINK_ID" >>"$MODULE_FILE"
-  fi
+create_record_mix() {
+  unload_modules
+  cleanup_old_sink
+  >"$MODULE_FILE"
 
-  pactl list short sinks | awk '{print $2 ".monitor"}' | while read -r SRC; do
-    if ! pactl list short modules | grep -q "source=$SRC" | grep -q "sink=system_sink"; then
-      local LOOP_ID=$(load_module module-loopback source="$SRC" sink=system_sink latency_msec=1)
-      echo "$LOOP_ID" >>"$MODULE_FILE"
-    fi
+  local SINK_ID=$(load_module module-null-sink sink_name=record_mix sink_properties=device.description=RecordMix)
+  echo "$SINK_ID" >>"$MODULE_FILE"
+
+  local MIC=$(pactl get-default-source)
+  local MIC_LOOP=$(load_module module-loopback source="$MIC" sink=record_mix latency_msec=1)
+  echo "$MIC_LOOP" >>"$MODULE_FILE"
+
+  for SRC in $(pactl list short sources | awk '$2 ~ /monitor/ && $2 !~ /record_mix/ {print $2}'); do
+    local LOOP_ID=$(load_module module-loopback source="$SRC" sink=record_mix latency_msec=1)
+    echo "$LOOP_ID" >>"$MODULE_FILE"
   done
 }
 
 start_recording() {
-  unload_modules
-  create_mic_sink
-  create_system_sink
+  create_record_mix
 
-  local MIC_MON=$(pactl list short sources | awk '/mic_sink.monitor/ && /RUNNING/ {print $2; exit}')
-  local SYS_MON=$(pactl list short sources | awk '/system_sink.monitor/ && /RUNNING/ {print $2; exit}')
-
-  wf-recorder -f "$FILENAME" -c libx264 -r 60 \
-    --audio="$MIC_MON" \
-    --audio="$SYS_MON" &
+  wf-recorder -f "$FILENAME" -c libx264 -r 60 --audio=record_mix.monitor &
   echo $! >"$PID_FILE"
 
   notify-send "🎥 Recording started" "File: $FILENAME"
@@ -84,25 +74,4 @@ toggle_recording() {
   fi
 }
 
-start_listener() {
-  if [[ ! -f "$LIS_PID_FILE" ]] || ! kill -0 "$(cat "$LIS_PID_FILE")" 2>/dev/null; then
-    (
-      pactl subscribe | while read -r event; do
-        if [[ $event == *"New sink"* ]] || [[ $event == *"Removed sink"* ]]; then
-          if [[ -f "$PID_FILE" ]]; then
-            create_system_sink
-            notify-send "🔄 Updated system audio sink loopbacks"
-          fi
-        fi
-      done
-    ) &
-    echo $! >"$LIS_PID_FILE"
-  fi
-}
-
-if [[ ! -f "$LIS_PID_FILE" ]] || ! kill -0 "$(cat "$LIS_PID_FILE")" 2>/dev/null; then
-  start_listener
-  start_recording
-else
-  toggle_recording
-fi
+toggle_recording
