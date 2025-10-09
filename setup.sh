@@ -29,7 +29,7 @@ fi
 
 # Install required packages
 print_status "Installing required packages..."
-brew install eza git-lfs stow zsh fish neovim go qmk/qmk/qmk
+brew install bash eza git-lfs stow zsh fish neovim go qmk/qmk/qmk
 git lfs install
 
 # Setup dot files

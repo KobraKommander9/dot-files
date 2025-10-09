@@ -1,7 +1,5 @@
 #!/usr/bin/env fish
 
-set -gx KUBE_PATH $HOME/.kube
-
 function switch_context -d "switch k8s context"
     set -gx KUBE $argv[1]
     set -gx CLOUDSDK_CONTAINER_CLUSTER $argv[2]

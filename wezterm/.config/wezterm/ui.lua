@@ -5,22 +5,22 @@ local win_utils = require("utils.window")
 
 wezterm.on("update-right-status", win_utils.update_right_status)
 
---[[
 local function background(config)
   local home = os.getenv("HOME")
 
   config.background = {
     {
       source = {
-        File = home .. "/.config/wezterm/images/chaotic_gore_magala.jpeg",
+        File = home .. "/.config/wezterm/images/chaotic_gore_magala_falling_v.jpg",
       },
       hsb = {
         brightness = 0.03,
       },
+      vertical_align = "Bottom",
+      horizontal_align = "Center",
     },
   }
 end
---]]
 
 function M.apply(config)
   config.enable_tab_bar = true
@@ -32,7 +32,7 @@ function M.apply(config)
   config.initial_cols = 160
 
   config.font = wezterm.font("GoMono Nerd Font Mono")
-  config.font_size = 12.0
+  config.font_size = 16.0
 
   config.color_scheme = "Dark+"
   config.inactive_pane_hsb = {
@@ -40,7 +40,7 @@ function M.apply(config)
     brightness = 0.4,
   }
 
-  -- background(config)
+  background(config)
 end
 
 return M

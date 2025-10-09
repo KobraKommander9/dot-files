@@ -5,6 +5,7 @@
 # set -gx GOBIN $GOPATH/bin
 
 set -gx CGO_ENABLED 1
+set -gx GOPRIVATE git.tcncloud.net
 
 # fish_add_path $GOBIN
 # fish_add_path $GOROOT/bin
