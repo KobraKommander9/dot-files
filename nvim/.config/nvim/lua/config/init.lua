@@ -15,56 +15,31 @@ require("lazy").setup({
   spec = {
     {
       "KobraKommander9/KobraVim",
+      branch = "rewrite2",
       opts = {
-        layouts = {
-          colemak = true,
-        },
-        start_screen = {
-          buttons = {
-            ["nv"] = { "nvim", "~/dot-files/nvim/.config/nvim" },
-            ["fg"] = { "Furious George", "~/fg" },
-            ["om"] = { "Omnichannel", "~/Matrix/services/omnichannel" },
-          },
-          folders = {
-            { "Matrix", "~/Matrix" },
-            { "Projects", "p", "~/Projects" },
-          },
-          workspaces = {
-            {
-              "Matrix Sessions",
-              "ms",
-              "~/Matrix",
-            },
-            {
-              "Project Sessions",
-              "ps",
-              "~/Projects/",
-            },
-            {
-              "Dotfile Sessions",
-              "ds",
-              "~/dot-files/",
-            },
-          },
-        },
+        keys = "colemak",
       },
-      import = "kobra.plugins",
+      import = "kobravim.plugins",
     },
     -- import any extras modules here
-    { import = "kobra.plugins.presets.kobra" },
+    { import = "kobravim.plugins.extras.dap" },
+    { import = "kobravim.plugins.extras.lang.go" },
+    { import = "kobravim.plugins.extras.lang.typescript" },
+    { import = "kobravim.plugins.extras.lang.wgsl" },
+    { import = "kobravim.plugins.extras.neotest" },
     -- import/override with your plugins
     { import = "plugins" },
   },
   defaults = {
     -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
     -- If you know what you're doing, you can set this to `true` to have all your custom plugins lazy-loaded by default.
-    lazy = false,
+    lazy = true,
     -- It's recommended to leave version=false for now, since a lot the plugin that support versioning,
     -- have outdated releases, which may break your Neovim install.
     version = false, -- always use the latest git commit
     -- version = "*", -- try installing the latest stable version for plugins that support semver
   },
-  install = { colorscheme = { "dracula" } },
+  -- install = { colorscheme = { "autumn" } },
   checker = { enabled = false }, -- automatically check for plugin updates
   performance = {
     rtp = {
