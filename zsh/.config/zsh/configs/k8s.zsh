@@ -1,3 +1,5 @@
+# requires: linkerd, kubectl
+
 # linkerd
 export PATH=$PATH:$HOME/.linkerd2/bin/
 
