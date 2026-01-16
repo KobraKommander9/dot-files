@@ -14,8 +14,15 @@ function switch_context() {
     [[ -n ${3} ]] && gcloud config configurations activate $3
 }
 
+if (( $+commands[kubectl] )); then
+  source <(kubectl completion zsh)
+fi
+
 alias k=kubectl
-compdef k=kubectl
+
+if (( $+commands[kubectl] )); then
+  compdef k=kubectl
+fi
 
 alias dev='switch_context dev dev-1 dev'
 alias staging='switch_context staging staging-1 staging'

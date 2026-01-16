@@ -34,7 +34,7 @@ checkhealth() {
   done
 
   echo "--- Summary ---"
-  if ((missing == 0 && missing_env == 0)); then
+  if ((missing_cmd == 0 && missing_env == 0)); then
     echo "[+] All requirements met!"
   else
     echo "[-] Found $missing_cmd missing command(s) and $missing_env missing env var(s)."
