@@ -32,7 +32,7 @@ function M.apply(config)
   config.initial_cols = 160
 
   config.font = wezterm.font("GoMono Nerd Font Mono")
-  config.font_size = 12.0
+  config.font_size = 16.0
 
   config.color_scheme = "Dark+"
   config.inactive_pane_hsb = {
