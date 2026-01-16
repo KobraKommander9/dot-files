@@ -1,12 +1,18 @@
-#!/bin/bash
+#!/usr/bin/env zsh
 
-# Plugins
+# General
 source "$HOME/.config/zsh/plugins.zsh"
+source "$HOME/.config/zsh/keybinds.zsh"
+source "$HOME/.config/zsh/styles.zsh"
+
+# Autocompletions
+autoload -Uz compinit
+compinit
 
 # Load other sources
-sources = (
-  ".config"
-  ".functions"
+sources=(
+  "configs"
+  "functions"
 )
 
 for s in "${sources[@]}"; do

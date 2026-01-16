@@ -31,4 +31,3 @@ description = "The current git branch, shortened"
 symbol = " "
 style = "bold purple"
 format = "[$symbol$output]($style) "
-ignore_timeout = true
