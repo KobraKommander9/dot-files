@@ -9,3 +9,9 @@ short-branch() {
   # Return last part after slash, or first part before dash, or full branch
   echo "${${b##*/}%%-*}"
 }
+
+gitclean() {
+  git branch --format="%(refname:short)" | grep -Ev '^(master|main)$' | xargs -r git branch -D
+}
+
+alias gitmaster="git checkout master && git pull && gitclean"
