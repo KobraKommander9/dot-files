@@ -1,3 +1,5 @@
+# requires: git
+
 short-branch() {
   # Get current branch, silent if git not available or not in a repo
   local b

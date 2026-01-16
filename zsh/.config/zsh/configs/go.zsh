@@ -4,3 +4,4 @@
 # export PATH=$PATH:$GOBIN:$GOROOT/bin
 
 export CGO_ENABLED=0
+export GOPRIVATE=git.tcncloud.net
