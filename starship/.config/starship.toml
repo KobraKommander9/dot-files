@@ -24,7 +24,7 @@ success_symbol = "[➜](bold green)"
 format = 'on [$active]($style) '
 
 [custom.short_branch]
-command = "short-branch"
+command = "zsh -ic short-branch"
 detect_folders = [".git"]
 detect_files = [".git"]
 description = "The current git branch, shortened"

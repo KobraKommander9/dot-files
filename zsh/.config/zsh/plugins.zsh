@@ -13,11 +13,11 @@ antigen bundle zsh-users/zsh-autosuggestions
 # Syntax highlighting
 antigen bundle zsh-users/zsh-syntax-highlighting
 
-# antigen bundle colored-man-pages
-# antigen bundle command-not-found
-# antigen bundle fzf # fuzzy finder
+antigen bundle colored-man-pages
+antigen bundle command-not-found
+antigen bundle fzf # fuzzy finder
+
 # antigen bundle jenv # java version manager
-# antigen bundle z # z command for jumping around
 
 ###############
 ###  APPLY  ###
