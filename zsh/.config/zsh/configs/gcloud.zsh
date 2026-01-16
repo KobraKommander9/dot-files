@@ -5,3 +5,5 @@ if [ -f "${HOME}/google-cloud-sdk/path.zsh.inc" ]; then . "${HOME}/google-cloud-
 if [ -f "${HOME}/google-cloud-sdk/completion.zsh.inc" ]; then . "${HOME}/google-cloud-sdk/completion.zsh.inc"; fi
 
 export CLOUDSDK_CONFIG=${HOME}/.config/gcloud
+
+alias glogin='gcloud projects list >/dev/null'
