@@ -11,15 +11,15 @@ compinit
 
 # Load other sources
 sources=(
-  "configs"
-  "functions"
+    "configs"
+    "functions"
 )
 
 for s in "${sources[@]}"; do
-  for c in "$HOME/.config/zsh/${s}"/*.zsh; do
-    source "${c}"
-  done
-  unset c
+    for c in "$HOME/.config/zsh/${s}"/*.zsh; do
+        source "${c}"
+    done
+    unset c
 done
 unset s
 
