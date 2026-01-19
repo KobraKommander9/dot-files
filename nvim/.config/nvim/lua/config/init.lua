@@ -15,7 +15,7 @@ require("lazy").setup({
   spec = {
     {
       "KobraKommander9/KobraVim",
-      branch = "rewrite2",
+      branch = "lsp",
       opts = {
         keys = "colemak",
       },
