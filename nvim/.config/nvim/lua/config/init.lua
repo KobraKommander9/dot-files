@@ -15,6 +15,7 @@ require("lazy").setup({
   spec = {
     {
       "KobraKommander9/KobraVim",
+      dev = true,
       branch = "lsp",
       opts = {
         keys = "colemak",
@@ -24,11 +25,15 @@ require("lazy").setup({
     -- import any extras modules here
     { import = "kobravim.plugins.extras.dap" },
     { import = "kobravim.plugins.extras.lang.go" },
+    { import = "kobravim.plugins.extras.lang.markdown" },
     { import = "kobravim.plugins.extras.lang.typescript" },
     { import = "kobravim.plugins.extras.lang.wgsl" },
     { import = "kobravim.plugins.extras.neotest" },
     -- import/override with your plugins
     { import = "plugins" },
+  },
+  dev = {
+    path = "~/Projects/nvim",
   },
   defaults = {
     -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.

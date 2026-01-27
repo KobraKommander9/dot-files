@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+export PATH=$PATH:$HOME/bin
+
 # General
 source "$HOME/.config/zsh/plugins.zsh"
 source "$HOME/.config/zsh/keybinds.zsh"

@@ -1,0 +1,6 @@
+[colors]
+background = "#262318"
+foreground = "#f2eed9"
+cursor_bg = "#322f25"
+ansi = ["#a48ead", "#f7768e", "#9ece6a", "#ff9e64", "#89ddff", "#ad8ee6", "#7aa2f7", "#f2eed9"]
+brights = ["#262318", "#db4b4b", "#7da383", "#e0af68", "#7aa2f7", "#bb9af7", "#89ddff", "#b8b4a0"]

@@ -11,17 +11,19 @@ function switch_context() {
     export CLOUDSDK_ACTIVE_CONFIG_NAME=$3
     export KUBECONFIG="${KUBE_PATH}/${KUBE}.conf"
     echo $KUBECONFIG
+    linkerd_version
+
     [[ -n ${3} ]] && gcloud config configurations activate $3
 }
 
 if (( $+commands[kubectl] )); then
-  source <(kubectl completion zsh)
+    source <(kubectl completion zsh)
 fi
 
 alias k=kubectl
 
 if (( $+commands[kubectl] )); then
-  compdef k=kubectl
+    compdef k=kubectl
 fi
 
 alias dev='switch_context dev dev-1 dev'
