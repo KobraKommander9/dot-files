@@ -12,7 +12,7 @@ linkerd_version() {
     fi
 
     local raw_output
-    raw_output=$(kubectl get deployment linkerd-identity -n linkerd -o jsonpath='{.metadata.labels.app\.kubernetes\.io/version}' 2>/dev/null)
+    raw_output=$(kubectl get deployment linkerd-identity -n linkerd -o jsonpath='{.metadata.labels.app\.kubernetes\.io/version}' 2>/dev/null | tr -d '[:space:]')
 
     if [[ -z "$raw_output" ]]; then
         echo -e "${RED}Error: Could not find linkerd version label.${NC}"
@@ -30,12 +30,12 @@ linkerd_version() {
     esac
 
     local target_dir="$HOME/bin"
-    local bin_path="$target_dir/linkerd-$version"
+    local bin_path="$target_dir/linkerd-$raw_output"
     local symlink_path="$target_dir/linkerd"
 
     [[ ! -d "$target_dir" ]] && mkdir -p "$target_dir"
 
-    if [[ -f "$bin_path" ]] && grep -qI . "$bin_path" >/dev/null 2>&1; then
+    if [[ -f "$bin_path" ]] && [[ -s "$bin_path" ]]; then
         echo -e "linkerd version: ${GREEN}${version}${NC}"
         ln -sf "$bin_path" "$symlink_path"
     else
