@@ -24,9 +24,8 @@ success_symbol = "[➜](bold green)"
 format = 'on [$active]($style) '
 
 [custom.short_branch]
-command = "zsh -ic short-branch"
+command = "git rev-parse --abbrev-ref HEAD 2>/dev/null | sed 's|.*/||; s|-.*||'"
 detect_folders = [".git"]
-detect_files = [".git"]
 description = "The current git branch, shortened"
 symbol = " "
 style = "bold purple"
