@@ -35,3 +35,9 @@ alias fra='switch_context fra fra-1 fra'
 alias lon='switch_context lon lon-1 lon'
 alias syd='switch_context syd syd-1 syd'
 alias yul='switch_context yul yul-1 yul'
+
+# replicas
+alias replicas='$HOME/Projects/Matrix/k8s/replicas/replicas.sh'
+
+# devclone
+alias devclone='$HOME/Projects/Matrix/utils/devclone/devclone'
