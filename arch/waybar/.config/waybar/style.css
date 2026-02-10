@@ -1,0 +1,37 @@
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "JetBrainsMono Nerd Font";
+  font-weight: bold;
+  font-size: 16px;
+  min-height: 0;
+}
+
+window#waybar {
+  background: rgba(21, 18, 27, 0.7);
+  color: #f6f7fc;
+}
+
+tooltip {
+  background: #1e1e2e;
+  opacity: 0.8;
+  border-radius: 10px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #11111b;
+}
+
+tooltip label{
+  color: #cdd6f4;
+}
+
+#cpu,
+#memory,
+#clock
+#pulseaudio {
+  background: rgba(21, 18, 27, 0.7);
+  opacity: 1;
+  padding: 0px 8px;
+  margin: 0px 3px;
+  border: 0px;
+}
