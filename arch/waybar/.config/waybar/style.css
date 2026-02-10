@@ -25,13 +25,20 @@ tooltip label{
   color: #cdd6f4;
 }
 
-#cpu,
 #memory,
-#clock
+#custom-cpu_temp,
+#custom-gpu_temp,
+#clock,
 #pulseaudio {
-  background: rgba(21, 18, 27, 0.7);
+  background: rgba(21, 18, 27, 0);
   opacity: 1;
   padding: 0px 8px;
   margin: 0px 3px;
+  border: 0px;
+}
+
+#cpu {
+  background: rgba(21, 18, 27, 0);
+  opacity: 1;
   border: 0px;
 }

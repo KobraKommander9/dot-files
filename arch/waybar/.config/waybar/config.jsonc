@@ -1,9 +1,11 @@
 {
   "layer": "top",
-  "height": 20,
+  "height": 22,
   "modules-left": [
     "memory",
-    "cpu"
+    "cpu",
+    "custom/cpu_temp",
+    "custom/gpu_temp"
   ],
   "modules-center": ["clock"],
   "modules-right": [
@@ -12,14 +14,26 @@
   ],
 
   // left modules
+  "memory": {
+    "interval": 30,
+    "format": " {used:0.1f}G/{total:0.1f}G"
+  },
+
   "cpu": {
     "interval": 10,
     "format": " {usage}%"
   },
 
-  "memory": {
-    "interval": 30,
-    "format": " {used:0.1f}G/{total:0.1f}G"
+  "custom/cpu_temp": {
+    "format": "{}",
+    "exec": "sensors | grep 'CPU Package' | awk '{print $3}' | tr -d '+'",
+    "interval": 5
+  },
+
+  "custom/gpu_temp": {
+    "format": " {}°C",
+    "exec": "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader",
+    "interval": 5
   },
 
   // center modules
