@@ -26,7 +26,6 @@ tooltip label{
 }
 
 #memory,
-#custom-cpu_temp,
 #custom-gpu_temp,
 #clock,
 #pulseaudio {
@@ -40,5 +39,12 @@ tooltip label{
 #cpu {
   background: rgba(21, 18, 27, 0);
   opacity: 1;
+  border: 0px;
+}
+
+#custom-cpu_temp {
+  background: rgba(21, 18, 27, 0);
+  opacity: 1;
+  margin-left: 5px;
   border: 0px;
 }
