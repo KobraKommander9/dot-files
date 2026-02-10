@@ -38,7 +38,8 @@
 
   // center modules
   "clock": {
-    "format-alt": "{:%a, %d. %b  %H:%M}",
+    "format": "{:%D  %I:%M %p}",
+    "format-alt": "{:%a, %d. %b  %I:%M %p}",
     "tooltip": false
   },
 
