@@ -1,0 +1,11 @@
+[terminal]
+vt = 1
+
+[greeter]
+type = "tuigreet"
+path = "/run/greetd.run"
+
+[default_session]
+command = "tuigreet --cmd start-hyprland"
+user = "greeter"
+autologin = false
