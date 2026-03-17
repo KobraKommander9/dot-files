@@ -22,7 +22,7 @@ antigen bundle lukechilds/zsh-nvm
 antigen bundle fzf
 antigen bundle Aloxaf/fzf-tab
 
-# antigen bundle jenv # java version manager
+antigen bundle jenv # java version manager
 
 ###############
 ###  APPLY  ###
