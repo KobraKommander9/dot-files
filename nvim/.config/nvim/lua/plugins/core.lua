@@ -16,7 +16,7 @@ return {
   -- },
   {
     "KobraKommander9/bookwyrm.nvim",
-    enable = false,
+    branch = "setup",
   },
   {
     "rktjmp/lush.nvim",

@@ -25,7 +25,7 @@ require("lazy").setup({
     -- import any extras modules here
     { import = "kobravim.plugins.extras.dap" },
     { import = "kobravim.plugins.extras.lang.go" },
-    { import = "kobravim.plugins.extras.lang.markdown" },
+    -- { import = "kobravim.plugins.extras.lang.markdown" },
     { import = "kobravim.plugins.extras.lang.typescript" },
     { import = "kobravim.plugins.extras.lang.wgsl" },
     { import = "kobravim.plugins.extras.neotest" },
