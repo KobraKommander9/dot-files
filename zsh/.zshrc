@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-export PATH=$PATH:$HOME/bin
+export PATH=$PATH:$HOME/bin:$HOME/.local/bin
 
 # General
 source "$HOME/.config/zsh/plugins.zsh"
