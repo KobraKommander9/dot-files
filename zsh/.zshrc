@@ -26,3 +26,6 @@ done
 unset s
 
 eval "$(starship init zsh)"
+
+# bun completions
+[ -s "/Users/kobrakommander9/.bun/_bun" ] && source "/Users/kobrakommander9/.bun/_bun"
