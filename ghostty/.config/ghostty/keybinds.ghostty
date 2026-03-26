@@ -1,0 +1,26 @@
+keybind = alt+p=activate_key_table:pane
+
+# Panes
+keybind = pane/catch_all=ignore
+
+keybind = pane/escape=deactivate_key_table
+keybind = pane/enter=deactivate_key_table
+
+keybind = pane/==equalize_splits
+keybind = pane/p=new_split
+keybind = pane/x=close_surface
+
+keybind = pane/h=resize_split:left,1
+keybind = pane/n=resize_split:down,1
+keybind = pane/e=resize_split:up,1
+keybind = pane/i=resize_split:right,1
+
+keybind = pane/shift+h=resize_split:left,10
+keybind = pane/shift+n=resize_split:down,10
+keybind = pane/shift+e=resize_split:up,10
+keybind = pane/shift+i=resize_split:right,10
+
+keybind = pane/ctrl+h=goto_split:left
+keybind = pane/ctrl+n=goto_split:down
+keybind = pane/ctrl+e=goto_split:up
+keybind = pane/ctrl+i=goto_split:right
