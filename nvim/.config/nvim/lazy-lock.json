@@ -1,6 +1,6 @@
 {
   "FixCursorHold.nvim": { "branch": "master", "commit": "1900f89dc17c603eec29960f57c00bd9ae696495" },
-  "KobraVim": { "branch": "lsp", "commit": "f54ef0939b315c4fa10bf661ad8d2f6fd153c254" },
+  "KobraVim": { "branch": "lsp", "commit": "dcf84e17eb82432572ed0b0f7d1ba95061c7a894" },
   "blame.nvim": { "branch": "main", "commit": "179da7aaacce7c52874af636255ede72dd6fe796" },
   "blink.cmp": { "branch": "main", "commit": "4b18c32adef2898f95cdef6192cbd5796c1a332d" },
   "bookwyrm.nvim": { "branch": "setup", "commit": "b2d73b55f02d0187cdbe5e17deb8897f9bd22098" },
