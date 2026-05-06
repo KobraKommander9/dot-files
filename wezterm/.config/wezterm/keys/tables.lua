@@ -259,6 +259,7 @@ function M.tables()
       },
 
       -- change sessions
+      { key = "d", action = act.SwitchToWorkspace({ name = "dotfiles" }) },
       { key = "n", action = act.SwitchWorkspaceRelative(1) },
       { key = "e", action = act.SwitchWorkspaceRelative(-1) },
 

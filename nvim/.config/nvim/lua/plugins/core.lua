@@ -6,21 +6,25 @@ return {
   },
   {
     "KobraKommander9/vintage-rose.nvim",
-    dev = true,
-    opts = {
-      cache = false,
-      lush = {
-        enabled = true,
-      },
-    },
+    -- dev = true,
+    -- opts = {
+    -- cache = false,
+    -- lush = {
+    --   enabled = true,
+    -- },
+    config = true,
   },
   {
     "KobraKommander9/bookwyrm.nvim",
-    branch = "setup",
+    -- branch = "setup",
     dev = true,
   },
   {
-    "rktjmp/lush.nvim",
-    cmd = { "Lushify" },
+    "folke/lazydev.nvim",
+    opts = {
+      library = {
+        { path = "bookwyrm", words = { "bookwyrm" } },
+      },
+    },
   },
 }
