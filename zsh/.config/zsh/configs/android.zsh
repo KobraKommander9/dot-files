@@ -5,7 +5,7 @@ case "$(uname)" in
         ;;
     *)
         export ANDROID_HOME=$HOME/Android/Sdk
-        export QT_QPA_PLATFORM=wayland;xcb
+        export QT_QPA_PLATFORM="wayland;xcb"
         export _JAVA_AWT_WM_NONREPARENTING=1
         export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
         ;;
