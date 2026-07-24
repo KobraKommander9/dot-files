@@ -29,3 +29,15 @@ pgbilling() {
 pgomni() {
     kpg "$DEV_OMNI_DB_POD" "$DEV_OMNI_DB_NAME" "$DEV_OMNI_DB_USER"
 }
+
+replicas() {
+    bash $HOME/Projects/Matrix/k8s/replicas/replicas.sh "$@"
+}
+
+devclone() {
+    bash $HOME/Projects/Matrix/utils/devclone/devclone "$@"
+}
+
+kpprof() {
+    bash $HOME/Projects/Matrix/setup/useful/bin/kubectl-pprof "$@"
+}
