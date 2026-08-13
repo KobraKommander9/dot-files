@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+typeset -U path
+
 export PATH=$PATH:$HOME/bin:$HOME/.local/bin
 
 # General
