@@ -29,7 +29,7 @@ fi
 
 # Install required packages
 print_status "Installing required packages..."
-brew install bash eza git-lfs stow zsh fish neovim go qmk/qmk/qmk
+brew install bash eza git-lfs stow zsh neovim go qmk/qmk/qmk
 git lfs install
 
 # Setup dot files
@@ -72,26 +72,27 @@ for font in fonts/*.ttf; do
   fi
 done
 
-# Create ~/.config directory if it doesn't exist
-print_status "Creating ~/.config directory..."
-mkdir -p ~/.config
+# Pre-create target dirs so stow folds one level down instead of symlinking
+# the whole directory (~/.claude holds session state that must stay local)
+print_status "Creating target directories..."
+mkdir -p ~/.config ~/.claude
 
 # Use stow to symlink dotfiles
 print_status "Setting up dotfiles using GNU Stow..."
-for dir in fish nvim wezterm zsh; do
+for dir in claude nvim wezterm zsh; do
   if [ -d "$dir" ]; then
     print_status "Setting up $dir..."
     stow -v -R -t ~ "$dir"
   fi
 done
 
-# Set fish as default shell
-print_status "Setting fish as default shell..."
-FISH_PATH=$(which fish)
-if ! grep -q "$FISH_PATH" /etc/shells; then
-  echo "$FISH_PATH" | sudo tee -a /etc/shells
+# Set zsh as default shell
+print_status "Setting zsh as default shell..."
+ZSH_PATH=$(which zsh)
+if ! grep -q "$ZSH_PATH" /etc/shells; then
+  echo "$ZSH_PATH" | sudo tee -a /etc/shells
 fi
-chsh -s "$FISH_PATH"
+chsh -s "$ZSH_PATH"
 
 # Setup qmk
 print_status "Setting up qmk..."

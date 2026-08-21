@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git status*)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(git branch*)",
+      "Bash(git checkout*)",
+      "Bash(git fetch*)",
+      "Bash(glab issue *)",
+      "Bash(glab mr list*)",
+      "Bash(glab mr view*)",
+      "Bash(glab mr diff*)",
+      "Bash(go build:*)",
+      "Bash(go test:*)",
+      "Bash(go vet:*)",
+      "Edit(/tmp/*.md)",
+      "Edit(/tmp/**/*.md)",
+      "Edit(**/docs/*.md)",
+      "Edit(**/docs/**/*.md)"
+    ],
+    "deny": [
+      "Bash(glab mr merge*)",
+      "Bash(git push*main*)",
+      "Bash(git push*master*)",
+      "Bash(git push --force*)",
+      "Bash(git reset --hard*)",
+      "Bash(git branch -D*)"
+    ]
+  },
+  "model": "opus[1m]",
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline-command.sh"
+  },
+  "effortLevel": "medium",
+  "tui": "default"
+}
