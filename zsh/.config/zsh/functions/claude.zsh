@@ -1,5 +1,17 @@
 # requires: git, stow
 
+# ~/.claude/settings.private.json is NOT read at user scope — Claude Code only
+# resolves settings.local.json relative to cwd. Load it as flag-scope settings
+# so machine-local config (work plugins, marketplaces) stays out of the repo.
+claude() {
+  local private="$HOME/.claude/settings.private.json"
+  if [[ -r $private ]]; then
+    command claude --settings "$private" "$@"
+  else
+    command claude "$@"
+  fi
+}
+
 # Report ~/.claude config that isn't linked into the dotfiles repo, plus
 # anything Claude wrote through a link that hasn't been committed yet.
 claude-strays() {
@@ -19,7 +31,7 @@ claude-strays() {
     history.jsonl ide logs paste-cache plugins policy-limits.json
     projects remote-settings.json session-env sessions shell-snapshots
     statsig stats-cache.json tasks telemetry todos
-    CLAUDE.local.md settings.local.json
+    CLAUDE.local.md settings.private.json
   )
 
   local -a detached=() strays=()

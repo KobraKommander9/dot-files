@@ -26,13 +26,15 @@
       "Bash(git push --force*)",
       "Bash(git reset --hard*)",
       "Bash(git branch -D*)"
-    ]
+    ],
+    "defaultMode": "manual"
   },
   "model": "opus[1m]",
   "statusLine": {
     "type": "command",
     "command": "bash ~/.claude/statusline-command.sh"
   },
+  "enabledPlugins": {},
   "effortLevel": "medium",
   "tui": "default"
 }
