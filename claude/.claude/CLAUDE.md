@@ -35,3 +35,19 @@ Voice disagreement openly and argue the case. He'll make the final call.
 ## "Done" means verified
 Don't claim success until you've confirmed it. Run the tests, build, and lint; actually check the
 behavior. Show the evidence. If something failed or you skipped a step, say so — don't paper over it.
+
+## Code Conventions
+- **Default to no comment.** Write one only when the meaning genuinely can't be
+  read off the code and the names — non-obvious *why*, never restated *what*.
+  A comment narrating what the next line does is noise: delete it, or fix the
+  name that made it necessary. Applies to inline comments as much as doc
+  comments, and to code review as much as to writing new code. When in doubt,
+  leave it out.
+- Comments never reference GitLab issue/MR/epic numbers — external IDs mean
+  nothing in source and rot. Future work gets a plain `TODO:` describing what
+  needs to happen, not which ticket tracks it.
+- Doc comments stay terse. Private functions get none unless genuinely
+  non-obvious; exported ones match their package siblings (1-3 lines). Don't
+  restate what the code already says.
+- Go: log int64 as strings (`strconv.FormatInt(id, 10)`) — Cloud Logging
+  truncates large int64 in JSON.
