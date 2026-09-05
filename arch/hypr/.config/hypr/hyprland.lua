@@ -99,6 +99,17 @@ float_rule("minecraft-launcher")
 float_rule("Emulator")
 float_rule("jetbrains-studio")
 
+local steamMouseConfine = hl.window_rule({
+  name = "steam-mouse-confine",
+  match = { class = "^steam_app_[0-9]+$" },
+  confine_pointer = true,
+})
+hl.bind("CTRL + ESCAPE", function()
+  steamMouseConfine:set_enabled(not steamMouseConfine:is_enabled())
+end, {
+  locked = true,
+})
+
 hl.window_rule({
   name = "suppress-maximize-events",
   match = { class = ".*" },
