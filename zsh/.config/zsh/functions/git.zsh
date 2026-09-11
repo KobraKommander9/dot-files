@@ -13,7 +13,7 @@ gitclean() {
 
 wt() {
     local repo branch dir
-    repo=$(git rev-pare --git-common-dir) || return 1
+    repo=$(git rev-parse --git-common-dir) || return 1
     repo=$(cd "$(dirname "$repo")" && pwd)
     branch="$1"; dir="$repo.worktrees/$branch"
 
