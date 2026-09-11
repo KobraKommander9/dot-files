@@ -27,7 +27,7 @@
       "Bash(git reset --hard*)",
       "Bash(git branch -D*)"
     ],
-    "defaultMode": "manual"
+    "defaultMode": "default"
   },
   "model": "opus[1m]",
   "statusLine": {
