@@ -39,7 +39,7 @@ wt() {
     if git -C "$repo" show-ref --verify --quiet "refs/remotes/origin/$branch"; then
         git -C "$repo" worktree add --track -b "$branch" "$dir" "origin/$branch" || return 1
     else
-        git -C "$repo" worktree add -b "$branch" "$dir" $(git-default-branch "$repoorigin/master") || return 1
+        git -C "$repo" worktree add -b "$branch" "$dir" $(git-default-branch "$repo") || return 1
     fi
 
     [[ -f "$repo/.claude/settings.local.json" ]] && mkdir -p "$dir/.claude" && \
@@ -47,4 +47,8 @@ wt() {
     cd "$dir"
 }
 
-alias gitmaster="git checkout $(git-default-branch) && git pull && gitclean"
+gitmaster() {
+    local base
+    base=$(git-default-branch .) || return 1
+    git checkout "${base#origin/}" && git pull && gitclean
+}
