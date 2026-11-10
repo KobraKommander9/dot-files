@@ -15,24 +15,36 @@ hl.env("SSH_AUTH_SOCK", "$XDG_RUNTIME_DIR/ssh-agent.socket")
 hl.monitor({
   output = "DP-2",
   mode = "2560x1440@240",
-  position = "2560x0",
+  position = "0x0",
   scale = 1,
-  transform = 3,
+  transform = 1,
 })
 
 hl.monitor({
   output = "DP-3",
   mode = "2560x1440@240",
-  position = "0x400",
+  position = "1440x200",
   scale = 1,
 })
 
+hl.workspace_rule({
+  workspace = "1",
+  monitor = "DP-3",
+  default = true,
+})
+
+hl.workspace_rule({
+  workspace = "2",
+  monitor = "DP-2",
+  default = true,
+})
+
 hl.on("hyprland.start", function()
-  -- hl.exec_cmd("systemctl --user import-environment SSH_AUTH_SOCK")
+  hl.exec_cmd("xrandr --output DP-3 --primary")
+
   hl.exec_cmd("systemctl --user start hyprpolkitagent")
   hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
-  -- hl.exec_cmd("dbus-update-activation-environment --systemd SSH_AUTH_SOCK")
-  -- hl.exec_cmd("ssh-agent -D -a $XDG_RUNTIME_DIR/ssh-agent.socket")
+
   hl.exec_cmd("hyprpaper")
   hl.exec_cmd("swaync")
   hl.exec_cmd("waybar")
@@ -58,6 +70,7 @@ hl.config({
     resize_on_border = true,
   },
   animations = { enabled = true },
+  cursor = { default_monitor = "DP-3" },
   decoration = {
     blur = {
       enabled = true,
@@ -106,9 +119,7 @@ local steamMouseConfine = hl.window_rule({
 })
 hl.bind("CTRL + ESCAPE", function()
   steamMouseConfine:set_enabled(not steamMouseConfine:is_enabled())
-end, {
-  locked = true,
-})
+end)
 
 hl.window_rule({
   name = "suppress-maximize-events",
